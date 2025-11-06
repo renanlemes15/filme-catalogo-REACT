@@ -16,7 +16,7 @@ function ListaFilmes() {
   }, []);
 
   const buscarFilmes = async () => {
-    const API_KEY = "7097bf45528762ff6ad180561caaeb67";
+    const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
     const url = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=pt-BR&page=1`;
 

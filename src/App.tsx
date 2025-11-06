@@ -11,13 +11,13 @@ function App() {
   return (
     <div className="app">
       <Navbar expand="lg" bg="dark" data-bs-theme="dark">
-        <Container>
+        <Container fluid px-4>
           <Navbar.Brand as={Link} to="/">
             Catálogo de Filmes
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic=navbar=nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className="mr-auto">
               <Nav.Link as={Link} to="/">
                 Listagem
               </Nav.Link>
@@ -30,7 +30,7 @@ function App() {
       </Navbar>
 
       <main>
-        <Container>
+        <Container fluid className="mt-4">
           <Routes>
             <Route path="/" element={<ListaFilmes />} />
             <Route path="/favoritos" element={<Favoritos />} />

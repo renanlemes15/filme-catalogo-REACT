@@ -1,12 +1,11 @@
 //src/App.tsx
 import "./App.css";
 import ListaFilmes from "./pages/ListaFilmes";
-import CadastroFilme from "./pages/CadastroFilme";
 import { Link, Route, Routes } from "react-router-dom";
-
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import Favoritos from "./pages/Favoritos";
 
 function App() {
   return (
@@ -22,8 +21,8 @@ function App() {
               <Nav.Link as={Link} to="/">
                 Listagem
               </Nav.Link>
-              <Nav.Link as={Link} to="/cadastro">
-                Cadastrar
+              <Nav.Link as={Link} to="/favoritos">
+                Meus Favoritos
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -34,7 +33,7 @@ function App() {
         <Container>
           <Routes>
             <Route path="/" element={<ListaFilmes />} />
-            <Route path="/cadastro" element={<CadastroFilme />} />
+            <Route path="/favoritos" element={<Favoritos />} />
           </Routes>
         </Container>
       </main>

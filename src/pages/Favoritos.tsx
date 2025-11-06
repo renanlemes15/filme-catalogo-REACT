@@ -1,7 +1,6 @@
 // src/pages/Favoritos.tsx
 import { useFavorites } from "../contexts/FavoritesContext";
 import FilmeCard from "../components/FilmeCard";
-import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
@@ -10,24 +9,24 @@ function Favoritos() {
 
   if (favorites.length === 0) {
     return (
-      <Container>
-        <h2>Meus Favoritos</h2>
+      <>
+        <h2 className="mb-4">Meus Favoritos</h2>
         <p>Você ainda não adicionou nenhum filme aos favoritos</p>
-      </Container>
+      </>
     );
   }
 
   return (
-    <Container>
-      <h2>Meus Favoritos</h2>
-      <Row>
+    <>
+      <h2 className="mb-4">Meus Favoritos</h2>
+      <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
         {favorites.map((filme) => (
-          <Col md={3} className="mb-4" key={filme.id}>
+          <Col key={filme.id}>
             <FilmeCard filme={filme} />
           </Col>
         ))}
       </Row>
-    </Container>
+    </>
   );
 }
 

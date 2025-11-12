@@ -19,7 +19,7 @@ function Favoritos() {
   return (
     <>
       <h2 className="mb-4">Meus Favoritos</h2>
-      <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
+      <Row xs={2} sm={2} md={3} lg={6} xl={6} className="g-4">
         {favorites.map((filme) => (
           <Col key={filme.id}>
             <FilmeCard filme={filme} />

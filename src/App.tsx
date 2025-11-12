@@ -1,11 +1,12 @@
 //src/App.tsx
 import "./App.css";
-import ListaFilmes from "./pages/ListaFilmes";
+import Home from "./pages/Home";
 import { Link, Route, Routes } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Favoritos from "./pages/Favoritos";
+import DetalhesFilme from "./pages/DetalhesFilme";
 
 function App() {
   return (
@@ -30,10 +31,11 @@ function App() {
       </Navbar>
 
       <main>
-        <Container fluid className="mt-4">
+        <Container className="mt-4">
           <Routes>
-            <Route path="/" element={<ListaFilmes />} />
+            <Route path="/" element={<Home />} />
             <Route path="/favoritos" element={<Favoritos />} />
+            <Route path="/filme/:id" element={<DetalhesFilme />} />
           </Routes>
         </Container>
       </main>

@@ -1,6 +1,4 @@
-.lista-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+.app {
+  background-color: #d9dde4d8;
+  min-height: 100vh;
 }

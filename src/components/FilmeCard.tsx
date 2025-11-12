@@ -2,50 +2,50 @@
 
 import type { Filme } from "../types/filme";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import { useFavorites } from "../contexts/FavoritesContext";
 import Badge from "react-bootstrap/Badge";
+import { Link } from "react-router-dom";
 
 interface FilmeCardProps {
   filme: Filme;
 }
 
 function FilmeCard({ filme }: FilmeCardProps) {
-  const { favorites, addFavorite, removeFavorite } = useFavorites();
-  const isFavorite = favorites.some((favFilme) => favFilme.id === filme.id);
+  const imageUrl = `https://image.tmdb.org/t/p/w500${filme.poster_path}`;
 
-  const imgUrl = `https://image.tmdb.org/t/p/w500${filme.poster_path}`;
-
-  const handleToggleFavrite = () => {
-    if (isFavorite) {
-      removeFavorite(filme.id);
-    } else {
-      addFavorite(filme);
-    }
+  const formatarData = (dataString: string) => {
+    if (!dataString) return "";
+    const data = new Date(dataString);
+    return data.toLocaleDateString("pt-BR", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
   };
 
   return (
-    <Card style={{ width: "18rem", height: "100%" }}>
-      <Card.Img variant="top" src={imgUrl} alt={filme.title} />
-      <Card.Body className="d-flex flex-column">
-        <Card.Title>{filme.title}</Card.Title>
-        <h5 className="mb-2">
-          <Badge bg="warning" text="dark">
-            Nota: {filme.vote_average.toFixed(1)}
-          </Badge>
-        </h5>
-        <Card.Text style={{ fontSize: "0.85rem" }}>
-          {filme.overview.substring(0, 100)}...
-        </Card.Text>
-        <Button
-          variant={isFavorite ? "danger" : "primary"}
-          onClick={handleToggleFavrite}
-          className="mt-auto"
+    <Link to={`/filme/${filme.id}`} className="text-decoration-none">
+      <Card
+        style={{ width: "180px", flex: "0 0 180px" }}
+        className="h-100 text-dark"
+      >
+        <Card.Img variant="top" src={imageUrl} alt={filme.title} />
+
+        <Badge
+          bg="warning"
+          text="dark"
+          className="position-absolute top-0 end-0 m-2"
         >
-          {isFavorite ? "Remover dos Favoritos" : "Adicionar aos favoritos"}
-        </Button>
-      </Card.Body>
-    </Card>
+          {filme.vote_average.toFixed(1)}
+        </Badge>
+
+        <div className="p-2">
+          <strong className="d-block">{filme.title}</strong>
+          <small className="text=muted">
+            {formatarData(filme.release_date)}
+          </small>
+        </div>
+      </Card>
+    </Link>
   );
 }
 

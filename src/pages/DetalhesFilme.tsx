@@ -7,6 +7,8 @@ import Col from "react-bootstrap/Col";
 import Image from "react-bootstrap/Image";
 import Badge from "react-bootstrap/Badge";
 import Spinner from "react-bootstrap/Spinner";
+import Button from "react-bootstrap/Button";
+import { useFavorites } from "../contexts/FavoritesContext";
 
 interface FilmeDetalhado {
   id: number;
@@ -23,6 +25,8 @@ function DetalhesFilme() {
   const { id } = useParams();
 
   const [filme, setFilme] = useState<FilmeDetalhado | null>(null);
+
+  const { favorites, addFavorite, removeFavorite } = useFavorites();
 
   useEffect(() => {
     const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
@@ -51,6 +55,16 @@ function DetalhesFilme() {
     );
   }
 
+  const favoritoEncontrado = favorites.find((fav) => fav.tmdbId === filme.id);
+
+  const handleToggleFavorite = () => {
+    if (favoritoEncontrado) {
+      removeFavorite(favoritoEncontrado.id);
+    } else {
+      addFavorite(filme);
+    }
+  };
+
   const imageUrl = `https://image.tmdb.org/t/p/w500${filme.poster_path}`;
   const anoLancamento = new Date(filme.release_date).getFullYear();
   const generos = filme.genres.map((genre) => genre.name).join(", ");
@@ -62,11 +76,11 @@ function DetalhesFilme() {
       </Col>
 
       <Col md={8}>
-        <h2>
+        <h2 className="text-light">
           {filme.title} ({anoLancamento})
         </h2>
-        <p className="lead">{filme.overview}</p>
-        <hr />
+        <p className="lead text-light">{filme.overview}</p>
+        <hr className="border-light opacity-25" />
 
         <h5>
           <Badge bg="warning" text="dark" className="me-2">
@@ -74,12 +88,22 @@ function DetalhesFilme() {
           </Badge>
         </h5>
 
-        <p>
+        <p className="text-light">
           <strong>Gêneros:</strong> {generos}
         </p>
-        <p>
+        <p className="text-light">
           <strong>Duração:</strong> {filme.runtime} minutos
         </p>
+
+        <Button
+          variant={favoritoEncontrado ? "danger" : "primary"}
+          onClick={handleToggleFavorite}
+          className="mt-3"
+        >
+          {favoritoEncontrado
+            ? "Remover dos favoritos"
+            : "Adicionar aos favoritos"}
+        </Button>
       </Col>
     </Row>
   );

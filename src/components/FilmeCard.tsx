@@ -26,7 +26,9 @@ function FilmeCard({ filme }: FilmeCardProps) {
     <Link to={`/filme/${filme.id}`} className="text-decoration-none">
       <Card
         style={{ width: "180px", flex: "0 0 180px" }}
-        className="h-100 text-dark"
+        className="h-100"
+        bg="dark"
+        text="white"
       >
         <Card.Img variant="top" src={imageUrl} alt={filme.title} />
 
@@ -39,7 +41,7 @@ function FilmeCard({ filme }: FilmeCardProps) {
         </Badge>
 
         <div className="p-2">
-          <strong className="d-block">{filme.title}</strong>
+          <strong className="d-block text-white">{filme.title}</strong>
           <small className="text=muted">
             {formatarData(filme.release_date)}
           </small>
